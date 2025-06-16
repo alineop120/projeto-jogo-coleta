@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "nome": "NPC 1",
+    "localizacao": {
+      "x": 4,
+      "y": 7
+    },
+    "status": "idle",
+    "tempo_ultimo_status": "2025-06-14T03:36:02.091120"
+  },
+  {
+    "id": 2,
+    "nome": "NPC 2",
+    "localizacao": {
+      "x": 4,
+      "y": 8
+    },
+    "status": "idle",
+    "tempo_ultimo_status": "2025-06-14T03:36:02.091137"
+  }
+]

@@ -1,0 +1,326 @@
+{
+    "width": 10,
+    "height": 10,
+    "tiles": [
+        [
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            }
+        ],
+        [
+            {
+                "walkable": true
+            },
+            {
+                "walkable": false
+            },
+            {
+                "walkable": false
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": false
+            },
+            {
+                "walkable": false
+            },
+            {
+                "walkable": true
+            }
+        ],
+        [
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": false
+            },
+            {
+                "walkable": false
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            }
+        ],
+        [
+            {
+                "walkable": true
+            },
+            {
+                "walkable": false
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": false
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": false
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            }
+        ],
+        [
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": false
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": false
+            },
+            {
+                "walkable": true
+            }
+        ],
+        [
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": false
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            }
+        ],
+        [
+            {
+                "walkable": false
+            },
+            {
+                "walkable": false
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": false
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": false
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            }
+        ],
+        [
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": false
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            }
+        ],
+        [
+            {
+                "walkable": true
+            },
+            {
+                "walkable": false
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": false
+            },
+            {
+                "walkable": false
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            }
+        ],
+        [
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            },
+            {
+                "walkable": true
+            }
+        ]
+    ]
+}
