@@ -3,20 +3,20 @@
     "id": 1,
     "nome": "NPC 1",
     "localizacao": {
-      "x": 4,
-      "y": 7
+      "x": 7,
+      "y": 2
     },
     "status": "idle",
-    "tempo_ultimo_status": "2025-06-14T03:36:02.091120"
+    "tempo_ultimo_status": "2025-06-22T23:53:39.463305"
   },
   {
     "id": 2,
     "nome": "NPC 2",
     "localizacao": {
-      "x": 4,
-      "y": 8
+      "x": 3,
+      "y": 7
     },
     "status": "idle",
-    "tempo_ultimo_status": "2025-06-14T03:36:02.091137"
+    "tempo_ultimo_status": "2025-06-22T23:53:39.463324"
   }
 ]

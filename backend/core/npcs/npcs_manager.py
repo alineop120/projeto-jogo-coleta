@@ -4,12 +4,15 @@ from datetime import datetime, timedelta
 from typing import List, Dict, Optional
 import logging
 import random
+from pathlib import Path
+
+BASE_DIR = Path(__file__).parent.parent  # Ajuste esse caminho para sua estrutura
 
 # Configuração básica de logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-CAMINHO_ARQUIVO = "dados/npcs.json"
+CAMINHO_ARQUIVO = BASE_DIR / "data" / "npcs.json"
 
 # Modelo de dados para validação
 NPC_SCHEMA = {

@@ -10,7 +10,7 @@ export default function RecursosList() {
             <h3>Recursos Próximos</h3>
             <ul>
                 {recursos?.map(recurso => (
-                    <li key={recurso.id}>
+                    <li key={`${recurso.tipo}-${recurso.x}-${recurso.y}`}>
                         {recurso.tipo} - Posição: ({recurso.x}, {recurso.y})
                     </li>
                 ))}

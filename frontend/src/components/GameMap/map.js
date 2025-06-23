@@ -1,4 +1,4 @@
-// src/components/GameMap/mapUtils.js
+// src/components/GameMap/map.js
 export const mapa = [
     [" ", " ", " ", " ", " ", " ", " ", " ", " ", "G"],
     [" ", "X", "X", " ", "L", " ", "X", "X", " ", " "],
