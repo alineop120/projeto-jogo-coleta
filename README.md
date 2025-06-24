@@ -1,4 +1,4 @@
-# [Nome do Seu Jogo] - Aventura de Coleta e Exploração
+# Gina Mission - Aventura de Coleta e Exploração
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Python](https://img.shields.io/badge/Python-3.9%2B-blue)
@@ -7,7 +7,7 @@
 
 ## 📖 Descrição
 
-[Nome do Seu Jogo] é um jogo interativo onde os jogadores exploram um mundo rico em recursos, interagem com personagens únicos e gerenciam seu progresso através de um sistema de coleta e troca.
+Gina Mission é um jogo interativo onde os jogadores exploram um mundo rico em recursos, interagem com personagens únicos e gerenciam seu progresso através de um sistema de coleta e troca.
 
 **Tecnologias:**
 - Frontend: React com Vite, Context API para gerenciamento de estado
