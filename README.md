@@ -1,30 +1,32 @@
-# [Nome do Seu Jogo] - Aventura de Coleta e Exploração
+# 🌲 Projeto Jogo - Aventura de Coleta e Exploração
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Python](https://img.shields.io/badge/Python-3.9%2B-blue)
 ![React](https://img.shields.io/badge/React-18%2B-blue)
 ![Vite](https://img.shields.io/badge/Vite-4%2B-orange)
 
+---
+
 ## 📖 Descrição
 
-[Nome do Seu Jogo] é um jogo interativo onde os jogadores exploram um mundo rico em recursos, interagem com personagens únicos e gerenciam seu progresso através de um sistema de coleta e troca.
+**Aventura de Coleta** é um jogo 2D interativo onde o jogador explora um mapa, interage com NPCs, coleta recursos e participa de uma economia simples com moedas, lojas e guildas.
 
-**Tecnologias:**
-- Frontend: React com Vite, Context API para gerenciamento de estado
-- Backend: Python (Flask/FastAPI) com endpoints RESTful
+**Tecnologias Utilizadas:**
 
+- 🔵 **Frontend**: React (Vite), Context API, uso de hooks customizados
+- 🐍 **Backend**: Python (Flask ou FastAPI), com API RESTful organizada
+- 📦 **Comunicação**: Axios + Proxy entre Vite e Flask
 
 ---
 
 ## 🎯 Objetivos do Projeto
 
-- [ ] Criar um mapa interativo com diferentes biomas (floresta, montanha, vila)
-- [ ] Implementar sistema de movimento do jogador
-- [ ] Desenvolver diálogos interativos com NPCs
-- [ ] Sistema de coleta e armazenamento de recursos
-- [ ] Interface de loja com economia dinâmica
-- [ ] Painel de missões da guilda
-- [ ] Integração frontend-backend via API REST
+- ✅ Criar um mapa interativo com terrenos e obstáculos
+- ✅ Movimento de NPCs com lógica (aleatória + direcionada)
+- ✅ Interação condicional com Loja e Guilda
+- ✅ Coleta de recursos convertida em moedas
+- 🔄 Economia dinâmica e compra de itens
+- 🔜 Painel de missões com regras por guilda
 
 ---
 
@@ -32,106 +34,98 @@
 
 ```bash
 projeto-jogo/
-├── backend/               # Servidor Python
-│   ├── core/              # Lógica do jogo (NPCs, player, recursos)
-│   ├── data/              # Dados persistidos (JSON)
-│   ├── routes/            # Endpoints da API
-│   ├── app.py             # Aplicação principal
-│   └── requirements.txt   # Dependências
+├── backend/
+│ ├── app.py # Inicialização da API
+│ ├── core/ # Lógica principal (jogador, npcs, recursos)
+│ ├── data/ # Dados mockados (JSON)
+│ ├── routes/ # Rotas da API
+│ └── requirements.txt
 │
-├── frontend/              # Aplicação React
-│   ├── src/
-│   │   ├── components/    # UI Components
-│   │   ├── context/       # Gerenciamento de estado
-│   │   ├── hooks/         # Custom hooks
-│   │   ├── pages/         # Telas do jogo
-│   │   ├── services/      # API clients
-│   │   └── utils/         # Funções auxiliares
-│   └── ...                # Configurações Vite
+├── frontend/
+│ ├── src/
+│ │ ├── api/ # Integração com backend
+│ │ ├── components/ # Componentes visuais
+│ │ ├── context/ # Contextos separados (Player, NPCs, Recursos)
+│ │ ├── GameMap/ # Lógica e mapa
+│ │ └── App.jsx # Entrada principal
+│ └── vite.config.js
 │
+├── .gitignore
 └── README.md
 ```
 
 ## 🚀 Como Executar 
 
-### Backend 
----
+## 🚀 Como Executar o Projeto
 
-1. Criar ambiente virtual:
+### 🧠 Backend (Python)
 
 ```bash
 cd backend
+
+# Linux/Mac
 python -m venv .venv
-source .venv/bin/activate  # Linux/Mac
-# OU
-.venv\Scripts\activate     # Windows
-```
+source .venv/bin/activate     
+# Windows
+.venv\Scripts\activate      
 
-2. Instalar dependências:
-
-```bash
 pip install -r requirements.txt
-```
-
-3. Iniciar servidor:
-
-```bash
 python app.py
 ```
-📌 API disponível em: http://localhost:4000
 
-### Frontend
+📌 API disponível em: http://localhost:5000/api
+
+### 💻 Frontend (React)
 
 ---
-
-1. Instalar dependências:
 
 ```bash
 cd frontend
 npm install
-```
-
-2. Iniciar aplicação:
-
-```bash
 npm run dev
 ```
 
 🌐 Disponível em: http://localhost:5173
 
-## 🔧 Configuração
+## 🔧 Variáveis de Ambiente
 
-Variáveis de Ambiente: Crie um arquivo .env no frontend:
+No frontend, crie um arquivo .env:
 
 ```env
-VITE_API_URL=http://localhost:5000
+VITE_API_URL=http://localhost:5000/api
 ```
 
-## ✨ Recursos Implementados
+## ✨ Funcionalidades Atuais
 
-* ✅ Sistema básico de movimento
-* ✅ Renderização do mapa 2D
-* ✅ Interação com NPCs
-* ✅ API REST funcional
-* ✅ Context API para gerenciamento de estado
+* ✅ Mapa 2D com terrenos navegáveis e obstáculos
+* ✅ Sistema de coleta de recursos
+* ✅ NPCs com movimento inteligente e randômico
+* ✅ Loja e guilda com painéis exclusivos
+* ✅ Sistema de moedas para compra de itens
+* ✅ Controle de entrada na guilda baseado em semáforo
 
-## 📅 Roadmap
+## 🛠️ Regras de Negócio Encapsuladas
 
-* Sistema de inventário
-* Missões da guilda
-* Loja com preços dinâmicos
-* Sistema de crafting
-* Interações com os npcs
+* localizacaoEspecial: movida para PainelInteracao.jsx
+* Lógica de compra no contexto PlayerContext
+* NPCs respeitam semáforos para não sobrepor o jogador
+* Contextos desacoplados e centralizados via GameProvider
 
-## 🛠️ Desafios Técnicos e Soluções
+## 📅 Roadmap Futuro
+* Sistema de crafting com uso de recursos coletados
+* Missões específicas por guilda
+* Inventário completo com gerenciamento visual
+* Caminhos alternativos para NPCs (A*)
+* Sistema de reputação e ranking
 
-| Desafio | Solução Implementada | Código Exemplo |
-|---------|----------------------|----------------|
-| Race conditions nos recursos | Semáforos binários | `threading.Semaphore(1)` |
-| Atualização inconsistente do estado | Padrão Observer | `Publisher-Subscriber` |
-| Deadlocks em interações complexas | Timeout em aquisição de locks | `lock.acquire(timeout=5)` |
-| Latência na comunicação | Cache local no frontend | `useMemo` no React |
-| Pathfinding de NPCs | Algoritmo A* simplificado | `priority_queue` em Python |
+## 🧠 Desafios Técnicos
+
+| Desafio | Solução Implementada |
+|---------|----------------------|
+| Concorrência nos recursos | Semáforos binários (`Semaphore`) | 
+| Evitar sobreposição de estados |	Contextos reativos + memoização|
+| Entradas simultâneas na guilda | Controle de ocupação com `NPC.id`|
+| Evitar flickering na UI |	Uso de `useMemo` e `React.memo`|
 
 ## 👥 Equipe
 

@@ -1,5 +1,7 @@
+# File: backend/routes/npcs_routes.py
+
 from flask import Blueprint, jsonify, request
-from core.npcs.npcs_manager import get_npcs, mover_npc
+from backend.core.npcs.npc_manager import get_npcs, mover_npc
 
 npcs_api = Blueprint('npcs_api', __name__)
 

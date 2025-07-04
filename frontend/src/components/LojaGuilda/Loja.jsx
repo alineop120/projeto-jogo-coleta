@@ -1,39 +1,31 @@
-// src/components/LojaGuilda/Loja.jsx
-import React, { useContext } from "react";
-import { GameContext } from "@context/GameContext";
-import { comprarItem } from "@services/api";
+// File: frontend/src/components/LojaGuilda/Loja.jsx
 
-const itensDisponiveis = [
-    { nome: "Comida", preco: 10 },
-    { nome: "Poção de Vida", preco: 20 },
-];
+import React from "react";
+import { usePlayer } from "@context/PlayerContext";
+
+const itensDisponiveis = [ /* ... */];
 
 export default function Loja() {
-    const { player, setPlayer } = useContext(GameContext);
+    const { player, updatePlayer } = usePlayer();
 
-    const handleCompra = async (item) => {
-        try {
-            const { data } = await comprarItem(item.nome);
-            alert(data.mensagem || "Item comprado!");
-            setPlayer(data.playerAtualizado);
-        } catch (error) {
-            console.error("Erro ao comprar item:", error);
-            alert("Erro na compra.");
+    const handleCompra = (item) => {
+        if (player.moedas < item.preco) {
+            alert("Moedas insuficientes");
+            return;
         }
+
+        updatePlayer({
+            ...player,
+            moedas: player.moedas - item.preco,
+            inventory: [...(player.inventory || []), item.nome],
+        });
     };
 
     return (
-        <div style={{ padding: "10px", backgroundColor: "#e0ffe0" }}>
+        <div>
             <h3>Loja</h3>
-            <ul>
-                {itensDisponiveis.map((item) => (
-                    <li key={item.nome}>
-                        {item.nome} – {item.preco} moedas{" "}
-                        <button onClick={() => handleCompra(item)}>Comprar</button>
-                    </li>
-                ))}
-            </ul>
-            <p>Moedas: {player?.moedas ?? 0}</p>
+            <p>Moedas: {player.moedas}</p>
+            {/* lista de itens */}
         </div>
     );
 }

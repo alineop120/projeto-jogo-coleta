@@ -1,3 +1,5 @@
+# File: backend/routes/map_routes.py
+
 from flask import Blueprint, jsonify
 import os
 import json

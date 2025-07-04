@@ -1,0 +1,64 @@
+/* File: frontend/src/styles/app.css */
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    text-align: center;
+    padding: 1rem;
+    background-color: #007acc;
+    color: white;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: #f0f0f0;
+}
+
+.left-panel,
+.right-panel {
+    width: 220px;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 1rem;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.map-section {
+    flex: 1;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    position: relative;
+}
+
+/* Ajusta para o mapa ocupar toda área possível */
+.map-section>div {
+    width: 100%;
+    height: 100%;
+}
+
+/* Para o loading e error ficarem centralizados */
+.loading,
+.error {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-size: 1.5rem;
+    color: #333;
+}

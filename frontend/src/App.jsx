@@ -1,10 +1,14 @@
+// File: frontend/src/App.jsx
+
 import React, { useContext } from 'react';
 import { GameContext } from '@context/GameContext';
 import GameMap from '@components/GameMap/GameMap';
 import PlayerMovement from '@components/Player/PlayerMovement';
-import NPCList from '@components/NPCs/NPCList';
-import RecursosList from '@components/Recursos/RecursosList';
+import PlayerStatus from '@components/Player/PlayerStatus';
+import PainelInteracao from '@components/UI/PainelInteracao';
 import ErrorBoundary from '@components/ErrorBoundary';
+
+import './styles/app.css';
 
 export default function App() {
     const { loading, error } = useContext(GameContext);
@@ -14,21 +18,26 @@ export default function App() {
 
     return (
         <div className="app-container">
-            <h1>Jogo de Coleta de Recursos</h1>
-            
-            <ErrorBoundary>
-                <GameMap />
-            </ErrorBoundary>
-            
-            <PlayerMovement />
-            
-            <ErrorBoundary>
-                <NPCList />
-            </ErrorBoundary>
-            
-            <ErrorBoundary>
-                <RecursosList />
-            </ErrorBoundary>
+            <header>
+                <h1>Jogo de Coleta de Recursos</h1>
+            </header>
+
+            <main>
+                <aside className="left-panel">
+                    <PlayerStatus />
+                </aside>
+
+                <section className="map-section">
+                    <ErrorBoundary>
+                        <GameMap />
+                    </ErrorBoundary>
+                    <PlayerMovement />
+                </section>
+
+                <aside className="right-panel">
+                    <PainelInteracao />
+                </aside>
+            </main>
         </div>
     );
 }

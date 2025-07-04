@@ -1,4 +1,5 @@
-import React, { useContext, useEffect } from 'react';
+// File: frontend/src/components/Player/PlayerMovement.jsx
+import { useEffect, useContext } from 'react';
 import { GameContext } from '@context/GameContext';
 
 export default function PlayerMovement() {
@@ -6,29 +7,23 @@ export default function PlayerMovement() {
 
     useEffect(() => {
         const handleKeyDown = (e) => {
-            switch (e.key.toLowerCase()) {
-                case 'w':
-                case 'arrowup':
-                    e.preventDefault();
-                    movePlayer('up');
-                    break;
-                case 's':
-                case 'arrowdown':
-                    e.preventDefault();
-                    movePlayer('down');
-                    break;
-                case 'a':
-                case 'arrowleft':
-                    e.preventDefault();
-                    movePlayer('left');
-                    break;
-                case 'd':
-                case 'arrowright':
-                    e.preventDefault();
-                    movePlayer('right');
-                    break;
-                default:
-                    break;
+            const key = e.key.toLowerCase();
+
+            const directions = {
+                w: 'up',
+                arrowup: 'up',
+                s: 'down',
+                arrowdown: 'down',
+                a: 'left',
+                arrowleft: 'left',
+                d: 'right',
+                arrowright: 'right',
+            };
+
+            const direction = directions[key];
+            if (direction) {
+                e.preventDefault();
+                movePlayer(direction);
             }
         };
 

@@ -1,35 +1,17 @@
 import React, { createContext, useState, useEffect, useMemo, useContext } from "react";
 import { mapa } from "@components/GameMap/mapUtils";
 
-// Simula API
-function fakeApi() {
-    return new Promise((res) =>
-        setTimeout(() => {
-            res({
-                player: { pos: { x: 0, y: 0 }, inventory: [] },
-                npcs: [
-                    { id: 1, nome: "NPC 1", localizacao: { x: 2, y: 9 }, status: "andando", destino: "Loja" },
-                    { id: 2, nome: "NPC 2", localizacao: { x: 0, y: 5 }, status: "andando", destino: "Guilda" },
-                ],
-                recursos: [
-                    { tipo: "madeira", x: 3, y: 5 },
-                    { tipo: "pedra", x: 7, y: 2 },
-                ],
-            });
-        }, 500)
-    );
+function acharPosicoes(tipo) {
+    const posicoes = [];
+    for (let y = 0; y < mapa.length; y++) {
+        for (let x = 0; x < mapa[y].length; x++) {
+            if (mapa[y][x] === tipo) posicoes.push({ x, y });
+        }
+    }
+    return posicoes;
 }
 
 export const GameContext = createContext();
-
-function acharPosicao(tipo) {
-    for (let y = 0; y < mapa.length; y++) {
-        for (let x = 0; x < mapa[y].length; x++) {
-            if (mapa[y][x] === tipo) return { x, y };
-        }
-    }
-    return null;
-}
 
 export function GameProvider({ children }) {
     const [player, setPlayer] = useState({ pos: { x: 0, y: 0 }, inventory: [] });
@@ -37,16 +19,19 @@ export function GameProvider({ children }) {
     const [recursos, setRecursos] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [localizacaoEspecial, setLocalizacaoEspecial] = useState(null);
 
-    const posLoja = useMemo(() => acharPosicao("L"), []);
-    const posGuilda = useMemo(() => acharPosicao("G"), []);
+    const posLojas = useMemo(() => acharPosicoes("L"), []);
+    const posGuildas = useMemo(() => acharPosicoes("G"), []);
 
-    // Load data once
     useEffect(() => {
-        async function load() {
+        async function loadGameData() {
             try {
                 setLoading(true);
+
+                // Aqui a fakeApi, pode substituir pela API real
                 const data = await fakeApi();
+
                 setPlayer(data.player);
                 setNpcs(data.npcs);
                 setRecursos(data.recursos);
@@ -57,46 +42,60 @@ export function GameProvider({ children }) {
                 setLoading(false);
             }
         }
-        load();
+
+        loadGameData();
     }, []);
 
+    // Atualiza NPCs andando em direção a lojas/guildas a cada 1s
     useEffect(() => {
         const interval = setInterval(() => {
             setNpcs((prevNpcs) =>
                 prevNpcs.map((npc) => {
-                    const destino = npc.destino === "Loja" ? posLoja : posGuilda;
-                    if (!destino) return npc;
-
+                    const andarAleatorio = Math.random() < 0.4; // 40% vagueia
                     const { x: nx, y: ny } = npc.localizacao;
-                    const dx = destino.x - nx;
-                    const dy = destino.y - ny;
 
-                    // Movimento simples de um passo
-                    const proxX = nx + Math.sign(dx);
-                    const proxY = ny + Math.sign(dy);
+                    if (andarAleatorio) {
+                        const direcoes = [
+                            { dx: 0, dy: -1 },
+                            { dx: 0, dy: 1 },
+                            { dx: -1, dy: 0 },
+                            { dx: 1, dy: 0 },
+                        ];
+                        const movimento = direcoes[Math.floor(Math.random() * direcoes.length)];
+                        const proxX = nx + movimento.dx;
+                        const proxY = ny + movimento.dy;
 
-                    // Evita passar por paredes ou sair do mapa
-                    if (
-                        mapa[proxY] &&
-                        mapa[proxY][proxX] &&
-                        mapa[proxY][proxX] !== "X"
-                    ) {
-                        return {
-                            ...npc,
-                            localizacao: { x: proxX, y: proxY },
-                        };
+                        if (mapa[proxY] && mapa[proxY][proxX] && mapa[proxY][proxX] !== "X") {
+                            return {
+                                ...npc,
+                                localizacao: { x: proxX, y: proxY },
+                            };
+                        }
+                        return npc;
+                    } else {
+                        const destino = npc.destino === "Loja" ? posLojas[0] : posGuildas[0];
+                        if (!destino) return npc;
+
+                        const dx = destino.x - nx;
+                        const dy = destino.y - ny;
+                        const proxX = nx + Math.sign(dx);
+                        const proxY = ny + Math.sign(dy);
+
+                        if (mapa[proxY] && mapa[proxY][proxX] && mapa[proxY][proxX] !== "X") {
+                            return {
+                                ...npc,
+                                localizacao: { x: proxX, y: proxY },
+                            };
+                        }
+                        return npc;
                     }
-
-                    return npc;
                 })
             );
-        }, 1000); // a cada 1s
-
+        }, 1000);
         return () => clearInterval(interval);
-    }, [posLoja, posGuilda]);
+    }, [posLojas, posGuildas]);
 
-
-    // Função para mover jogador respeitando limites e obstáculos
+    // Função para mover jogador respeitando limites, obstáculos e semaforização
     const movePlayer = (direction) => {
         setPlayer((prev) => {
             const { x, y } = prev.pos;
@@ -123,9 +122,52 @@ export function GameProvider({ children }) {
             if (!mapa[newY] || !mapa[newY][newX]) return prev;
             if (mapa[newY][newX] === "X") return prev;
 
+            // Verifica se tem NPC no local novo
+            const npcNoLocal = npcs.some(
+                (npc) => npc.localizacao.x === newX && npc.localizacao.y === newY
+            );
+            if (npcNoLocal) return prev;
+
+            // Verifica se o local novo é uma loja ou guilda e se está ocupado
+            const pos = { x: newX, y: newY };
+            if (verificarLocalizacaoEspecial(pos, posLojas) && estaOcupado("loja", pos)) {
+                return prev; // Loja ocupada, bloqueia movimento
+            }
+            if (verificarLocalizacaoEspecial(pos, posGuildas) && estaOcupado("guilda", pos)) {
+                return prev; // Guilda ocupada, bloqueia movimento
+            }
+
             return { ...prev, pos: { x: newX, y: newY } };
         });
     };
+
+    // Verifica se uma posição está dentro de uma lista de posições especiais
+    function verificarLocalizacaoEspecial(posPlayer, posicoes) {
+        return posicoes.some(pos => pos.x === posPlayer.x && pos.y === posPlayer.y);
+    }
+
+    // Atualiza localizacaoEspecial sempre que o player se move
+    useEffect(() => {
+        if (verificarLocalizacaoEspecial(player.pos, posLojas)) {
+            setLocalizacaoEspecial("loja");
+        } else if (verificarLocalizacaoEspecial(player.pos, posGuildas)) {
+            setLocalizacaoEspecial("guilda");
+        } else {
+            setLocalizacaoEspecial(null);
+        }
+    }, [player.pos, posLojas, posGuildas]);
+
+    // Verifica se loja/guilda está ocupada por algum NPC
+    function estaOcupado(tipoLocal, posPlayer) {
+        const posicoes = tipoLocal === "loja" ? posLojas : posGuildas;
+        if (!verificarLocalizacaoEspecial(posPlayer, posicoes)) return false;
+
+        return npcs.some(
+            npc => npc.localizacao.x === posPlayer.x &&
+                   npc.localizacao.y === posPlayer.y &&
+                   npc.destino.toLowerCase() === tipoLocal
+        );
+    }
 
     return (
         <GameContext.Provider
@@ -136,6 +178,10 @@ export function GameProvider({ children }) {
                 loading,
                 error,
                 movePlayer,
+                localizacaoEspecial,
+                posLojas,
+                posGuildas,
+                estaOcupado,
             }}
         >
             {children}
@@ -145,4 +191,23 @@ export function GameProvider({ children }) {
 
 export function useGame() {
     return useContext(GameContext);
+}
+
+// MOCK API
+function fakeApi() {
+    return new Promise((res) =>
+        setTimeout(() => {
+            res({
+                player: { pos: { x: 0, y: 0 }, inventory: [] },
+                npcs: [
+                    { id: 1, nome: "NPC 1", localizacao: { x: 2, y: 9 }, status: "andando", destino: "Loja" },
+                    { id: 2, nome: "NPC 2", localizacao: { x: 0, y: 5 }, status: "andando", destino: "Guilda" },
+                ],
+                recursos: [
+                    { tipo: "madeira", x: 3, y: 5 },
+                    { tipo: "pedra", x: 7, y: 2 },
+                ],
+            });
+        }, 500)
+    );
 }

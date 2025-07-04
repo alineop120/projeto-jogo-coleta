@@ -1,18 +1,25 @@
-// src/components/Player/PlayerStatus.jsx
+// File: frontend/src/components/Player/PlayerStatus.jsx
 import React, { useContext } from "react";
 import { GameContext } from "@context/GameContext";
 
 export default function PlayerStatus() {
     const { player } = useContext(GameContext);
 
-    if (!player || !player.pos) return <p>Carregando jogador...</p>;
+    if (!player?.pos) return <p>Carregando jogador...</p>;
+
+    const {
+        vida = "?",
+        moedas = 0,
+        pos: { x, y },
+        inventory = [],
+    } = player;
 
     return (
-        <div style={{ padding: "10px", backgroundColor: "#eee" }}>
-            <p>Vida: {player.vida ?? "?"}</p>
+        <div style={{ padding: "10px", backgroundColor: "#eee", borderRadius: "5px" }}>
+            <p><strong>Vida:</strong> {vida}</p>
             <p>Moedas: {player.moedas ?? 0}</p>
-            <p>Posição: ({player.pos.x}, {player.pos.y})</p>
-            <p>Inventário: {player.inventory?.join(", ") || "vazio"}</p>
+            <p><strong>Posição:</strong> ({x}, {y})</p>
+            <p><strong>Inventário:</strong> {inventory.length ? inventory.join(", ") : "vazio"}</p>
         </div>
     );
 }

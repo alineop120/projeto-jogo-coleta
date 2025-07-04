@@ -1,10 +1,11 @@
+# File: backend/routes/recursos_routes.py
+
 from flask import Blueprint, jsonify
+from core.recursos.recurso_manager import get_recursos_estado
 
-recursos_api = Blueprint('recursos_api', __name__)
+recursos_api = Blueprint('recursos_api', __name__, url_prefix='/api/recursos')
 
-@recursos_api.route('/')
+@recursos_api.route('/', methods=['GET'])
 def get_recursos():
-    return jsonify([
-        {"id": 1, "tipo": "madeira", "x": 3, "y": 5},
-        {"id": 2, "tipo": "pedra", "x": 7, "y": 2}
-    ])
+    recursos = get_recursos_estado()
+    return jsonify(recursos), 200
