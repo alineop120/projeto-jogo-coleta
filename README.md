@@ -1,4 +1,5 @@
-# 🌲 Projeto Jogo - Aventura de Coleta e Exploração
+# 🌲 Gina Mission - Aventura de Coleta e Exploração
+
 
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Python](https://img.shields.io/badge/Python-3.9%2B-blue)
@@ -9,7 +10,7 @@
 
 ## 📖 Descrição
 
-**Aventura de Coleta** é um jogo 2D interativo onde o jogador explora um mapa, interage com NPCs, coleta recursos e participa de uma economia simples com moedas, lojas e guildas.
+Gina Mission é um jogo interativo onde os jogadores exploram um mundo rico em recursos, interagem com personagens únicos e gerenciam seu progresso através de um sistema de coleta e troca.
 
 **Tecnologias Utilizadas:**
 
